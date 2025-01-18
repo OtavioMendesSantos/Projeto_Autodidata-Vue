@@ -14,95 +14,18 @@
   <body>
     <div id="app">
       <div class="cart">Cart: {{cart}}</div>
-      <div class="product-display">
-        <div class="product-container">
-          <div class="product-image">
-            <img v-bind:src="image" srcset="" />
-          </div>
-          <div class="product-info">
-            <h1>{{ titleWithBrand }}</h1>
-            <p v-if="inStock > 5">In Stock</p>
-            <p v-else-if="inStock < 5 && inStock >= 1">Almost sold out</p>
-            <p v-else>Out of Stock</p>
-            <p>{{ inStock }}</p>
-            <ul>
-              <li v-for="detail in datails">{{detail}}</li>
-            </ul>
-            <div
-              v-for="variant in variants"
-              :key="variant.id"
-              v-on:mouseover="changeProduct(variant)"
-              class="color-circle"
-              :style="{ backgroundColor: variant.color }"
-            ></div>
-            <!-- Se for false, a classe n será aplicada ao botão -->
-            <button
-              class="button"
-              @click="addToCart"
-              :disabled="inStock < 1"
-              :class="{ disabledButton: inStock < 1 }"
-            >
-              Add to cart
-            </button>
-          </div>
-        </div>
-      </div>
+      <product-display @add-to-cart="addToCart"></product-display>
       <!--<h1>{{message}}</h1>-->
       <!--<input type="text" v-model="message" /> two way data binding -->
     </div>
 
-    <script>
-      const { createApp, ref, computed } = Vue;
-      createApp({
-        setup() {
-          //one way data binding
-          const message = ref("Ola mundo!");
-          const cart = ref(0);
-          const image = ref("./assets/images/t-shirt-blue.png");
-          const product_title = ref("Blue T-shirt");
-          const brand = "Vue Mastery";
+    <!-- Arquivo principal -->
+    <script src="./main.js"></script>
 
-          function addToCart() {
-            console.log(cart);
-            cart.value++;
-          }
+    <!-- Importando componentes -->
+    <script src="./components/product.js"></script>
 
-          function changeProduct(product) {
-            image.value = product.image;
-            product_title.value = product.name;
-          }
-
-          // Propriedade Computada
-          const titleWithBrand = computed(() => {
-            return product_title.value + " - " + brand.value;
-          });
-
-          return {
-            message,
-            image,
-            inStock: ref(Math.floor(Math.random() * 7)),
-            datails: ["80% cotton", "20% polyester", "Gender-neutral"],
-            variants: [
-              {
-                id: 1,
-                name: "Blue T-shirt",
-                color: "blue",
-                image: "./assets/images/t-shirt-blue.png",
-              },
-              {
-                id: 2,
-                name: "Green T-shirt",
-                color: "green",
-                image: "./assets/images/t-shirt-green.png",
-              },
-            ],
-            cart,
-            addToCart,
-            changeProduct,
-            titleWithBrand,
-          };
-        },
-      }).mount("#app");
-    </script>
+    <!-- Montando o app -->
+    <script>app.mount("#app");</script>
   </body>
 </html>
