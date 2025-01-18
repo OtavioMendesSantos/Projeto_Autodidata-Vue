@@ -180,11 +180,3 @@ ul {
     width: 90%;
   }
 }
-
-.color-box{
-  width: 40px;
-  height: 40px;
-  margin-top: 8px;
-  border: 2px solid #d8d8d8;
-  border-radius: 50%;
-}
