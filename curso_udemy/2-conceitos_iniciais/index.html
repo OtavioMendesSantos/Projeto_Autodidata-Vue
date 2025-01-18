@@ -13,7 +13,7 @@
   </head>
   <body>
     <div id="app">
-      <div class="cart">Cart: {{cart}}</div>
+      <cart-display :cart="cart"></cart-display>
       <product-display @add-to-cart="addToCart"></product-display>
       <!--<h1>{{message}}</h1>-->
       <!--<input type="text" v-model="message" /> two way data binding -->
@@ -24,6 +24,7 @@
 
     <!-- Importando componentes -->
     <script src="./components/product.js"></script>
+    <script src="./components/cart.js"></script>
 
     <!-- Montando o app -->
     <script>app.mount("#app");</script>
