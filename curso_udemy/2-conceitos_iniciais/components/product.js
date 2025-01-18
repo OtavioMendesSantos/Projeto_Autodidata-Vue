@@ -13,7 +13,7 @@ app.component("product-display", {
 
         // Propriedade Computada
         const titleWithBrand = computed(() => {
-            return product_title.value + " - " + brand.value;
+            return product_title.value + " - " + brand;
         });
 
         return {
@@ -43,34 +43,34 @@ app.component("product-display", {
         <div class="product-display">
             <div class="product-container">
                 <div class="product-image">
-                <img v-bind:src="image" srcset="" />
+                    <img v-bind:src="image" srcset="" />
                 </div>
                 <div class="product-info">
-                <h1>{{ titleWithBrand }}</h1>
-                <p v-if="inStock > 5">In Stock</p>
-                <p v-else-if="inStock < 5 && inStock >= 1">Almost sold out</p>
-                <p v-else>Out of Stock</p>
-                <p>{{ inStock }}</p>
-                <ul>
-                    <li v-for="detail in datails">{{detail}}</li>
-                </ul>
-                <div
-                    v-for="variant in variants"
-                    :key="variant.id"
-                    v-on:mouseover="changeProduct(variant)"
-                    class="color-circle"
-                    :style="{ backgroundColor: variant.color }"
-                ></div>
-                <!-- Se for false, a classe n será aplicada ao botão -->
-                <!-- Emite um evento 'add-to-cart' que é 'ouvido' pelo componente pai e executa a funcao 'addToCart' -->
-                <button
-                    class="button"                
-                    @click="$emit('add-to-cart')"
-                    :disabled="inStock < 1"
-                    :class="{ disabledButton: inStock < 1 }"
-                >
-                    Add to cart
-                </button>
+                    <h1>{{ titleWithBrand }}</h1>
+                    <p v-if="inStock > 5">In Stock</p>
+                    <p v-else-if="inStock < 5 && inStock >= 1">Almost sold out</p>
+                    <p v-else>Out of Stock</p>
+                    <p>{{ inStock }}</p>
+                    <ul>
+                        <li v-for="detail in datails">{{detail}}</li>
+                    </ul>
+                    <div
+                        v-for="variant in variants"
+                        :key="variant.id"
+                        v-on:mouseover="changeProduct(variant)"
+                        class="color-circle"
+                        :style="{ backgroundColor: variant.color }"
+                    ></div>
+                    <!-- Se for false, a classe n será aplicada ao botão -->
+                    <!-- Emite um evento 'add-to-cart' que é 'ouvido' pelo componente pai e executa a funcao 'addToCart' -->
+                    <button
+                        class="button"                
+                        @click="$emit('add-to-cart')"
+                        :disabled="inStock < 1"
+                        :class="{ disabledButton: inStock < 1 }"
+                    >
+                        Add to cart
+                    </button>
                 </div>
             </div>
         </div>
