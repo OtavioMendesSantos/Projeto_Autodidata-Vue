@@ -1,25 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cutso Vue Js 3</title>
+    <styles>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Curso Vue Js 3</title>
+
+      <!-- STYLE -->
+      <link rel="stylesheet" href="./assets/styles.css"
+    /></styles>
 
     <!-- VUE CDN -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
   <body>
     <div id="app">
-      <h1>{{message}}</h1>
-      <input type="text" v-model="message" /> <!-- two way data binding -->
+      <div class="product-display">
+        <div class="product-container">
+          <div class="product-image">
+            <img v-bind:src="image" :title="img_product" srcset="" />
+          </div>
+          <div class="product-info">
+            <h1>{{ product_title }}</h1>
+            <p v-if="inStock">In Stock</p>
+            <p v-else>Out of Stock</p>
+          </div>
+        </div>
+      </div>
+      <!--<h1>{{message}}</h1>-->
+      <!--<input type="text" v-model="message" /> two way data binding -->
     </div>
+
     <script>
       const { createApp, ref } = Vue;
-
       createApp({
         setup() {
           const message = ref("Ola mundo!");
-          return { message }; //one way data binding
+          //one way data binding
+          return {
+            message,
+            image: ref("./assets/images/t-shirt-blue.png"),
+            img_product: ref("Camiseta Azul"),
+            product_title: ref("Camiseta Azul"),
+            inStock: ref(true),
+          };
         },
       }).mount("#app");
     </script>
