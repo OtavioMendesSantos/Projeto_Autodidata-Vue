@@ -22,8 +22,10 @@
           </div>
           <div class="product-info">
             <h1>{{ product_title }}</h1>
-            <p v-if="inStock">In Stock</p>
+            <p v-if="inStock > 5">In Stock</p>
+            <p v-else-if="inStock < 5 && inStock >= 1">Almost sold out</p>
             <p v-else>Out of Stock</p>
+            <p>{{ inStock }}</p>
           </div>
         </div>
       </div>
@@ -42,7 +44,7 @@
             image: ref("./assets/images/t-shirt-blue.png"),
             img_product: ref("Camiseta Azul"),
             product_title: ref("Camiseta Azul"),
-            inStock: ref(true),
+            inStock: ref(Math.floor(Math.random() * 7)),
           };
         },
       }).mount("#app");
