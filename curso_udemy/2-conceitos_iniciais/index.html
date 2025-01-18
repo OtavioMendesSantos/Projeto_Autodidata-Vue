@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
-    <styles>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Curso Vue Js 3</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curso Vue Js 3</title>
 
-      <!-- STYLE -->
-      <link rel="stylesheet" href="./assets/styles.css"
-    /></styles>
+    <!-- STYLE -->
+    <link rel="stylesheet" href="./assets/styles.css" />
 
     <!-- VUE CDN -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -22,7 +20,7 @@
             <img v-bind:src="image" srcset="" />
           </div>
           <div class="product-info">
-            <h1>{{ product_title }}</h1>
+            <h1>{{ titleWithBrand }}</h1>
             <p v-if="inStock > 5">In Stock</p>
             <p v-else-if="inStock < 5 && inStock >= 1">Almost sold out</p>
             <p v-else>Out of Stock</p>
@@ -37,6 +35,7 @@
               class="color-circle"
               :style="{ backgroundColor: variant.color }"
             ></div>
+            <!-- Se for false, a classe n será aplicada ao botão -->
             <button
               class="button"
               @click="addToCart"
@@ -53,7 +52,7 @@
     </div>
 
     <script>
-      const { createApp, ref } = Vue;
+      const { createApp, ref, computed } = Vue;
       createApp({
         setup() {
           //one way data binding
@@ -61,6 +60,7 @@
           const cart = ref(0);
           const image = ref("./assets/images/t-shirt-blue.png");
           const product_title = ref("Blue T-shirt");
+          const brand = "Vue Mastery";
 
           function addToCart() {
             console.log(cart);
@@ -72,10 +72,14 @@
             product_title.value = product.name;
           }
 
+          // Propriedade Computada
+          const titleWithBrand = computed(() => {
+            return product_title.value + " - " + brand.value;
+          });
+
           return {
             message,
             image,
-            product_title,
             inStock: ref(Math.floor(Math.random() * 7)),
             datails: ["80% cotton", "20% polyester", "Gender-neutral"],
             variants: [
@@ -95,6 +99,7 @@
             cart,
             addToCart,
             changeProduct,
+            titleWithBrand,
           };
         },
       }).mount("#app");
