@@ -26,6 +26,12 @@
             <p v-else-if="inStock < 5 && inStock >= 1">Almost sold out</p>
             <p v-else>Out of Stock</p>
             <p>{{ inStock }}</p>
+            <ul>
+              <li v-for="detail in datails">{{detail}}</li>
+            </ul>
+            <div v-for="variant in variants" :key="variant.id">
+              {{variant.color}}
+            </div>
           </div>
         </div>
       </div>
@@ -45,6 +51,15 @@
             img_product: ref("Camiseta Azul"),
             product_title: ref("Camiseta Azul"),
             inStock: ref(Math.floor(Math.random() * 7)),
+            datails: ["80% cotton", "20% polyester", "Gender-neutral"],
+            variants: [
+              {
+                id: 1,
+                color: "blue",
+                image: "./assets/images/t-shirt-blue.png",
+              },
+              { id: 2, color: "red", image: "./assets/images/t-shirt-red.png" },
+            ],
           };
         },
       }).mount("#app");
