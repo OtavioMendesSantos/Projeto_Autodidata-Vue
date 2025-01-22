@@ -1,3 +1,8 @@
 <template>
-    <h1>Esta é página home!</h1>
+    <ListTasks />
 </template>
+
+<script setup>
+import ListTasks from '@/components/ListTasks.vue';
+
+</script>
