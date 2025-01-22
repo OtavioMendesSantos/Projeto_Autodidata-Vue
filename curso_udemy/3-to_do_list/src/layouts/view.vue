@@ -10,7 +10,7 @@
               <v-icon :icon="item.icon"></v-icon>
             </template>
 
-            <v-list-item-title v-text="item.text"></v-list-item-title>
+            <v-list-item-title :textContent="item.text"></v-list-item-title>
           </v-list-item>
         </router-link>
       </v-list>
@@ -19,7 +19,7 @@
     <v-app-bar>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-app-bar-title>Application</v-app-bar-title>
+      <v-app-bar-title>To do list</v-app-bar-title>
     </v-app-bar>
 
     <v-main>
@@ -42,5 +42,6 @@ const items = [
 <style scoped>
 a {
   text-decoration: none;
+  color: #505050;
 }
 </style>
