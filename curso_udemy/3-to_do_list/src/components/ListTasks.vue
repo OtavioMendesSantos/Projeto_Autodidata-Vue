@@ -1,34 +1,36 @@
 <template>
-    <div>
-        <v-text-field label="Add Task" @keyup="addTask" v-model="task.title"></v-text-field>
-        <v-list lines="three" select-strategy="classic">
-            <v-list-subheader>Tasks</v-list-subheader>
-            <v-list-item v-for="(task, index) in tasks" :key="index" :subtitle="task.subtitle" :title="task.title"
-                :value="index">
-                <template v-slot:prepend="{ isSelected }">
-                    <v-list-item-action start>
-                        <v-checkbox-btn :model-value="isSelected"></v-checkbox-btn>
-                    </v-list-item-action>
-                </template>
-            </v-list-item>
-        </v-list>
-    </div>
+    <v-list lines="three" select-strategy="classic">
+        <v-list-subheader>Tasks</v-list-subheader>
+        <v-list-item v-for="(task, index) in props.tasks" :key="index" :subtitle="task.subtitle" :title="task.title"
+            :value="index">
+            <template v-slot:prepend="{ isSelected }">
+                <v-list-item-action start>
+                    <v-checkbox-btn :model-value="isSelected"></v-checkbox-btn>
+                </v-list-item-action>
+            </template>
+            <template v-slot:append>
+                <v-menu>
+                    <template v-slot:activator="{ props }">
+                        <v-btn color="primary" icon="mdi-dots-vertical" v-bind="props" variant="plain"></v-btn>
+                    </template>
+                    <v-list>
+                        <v-list-item value="1">
+                            <v-list-item-title>Editar</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item value="2">
+                            <v-list-item-title>Deletar</v-list-item-title>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
+            </template>
+        </v-list-item>
+    </v-list>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { defineProps } from 'vue';
 
-const task = ref({ title: '', subtitle: '' });
-const tasks = ref([])
-
-function addTask(e) {
-    if (e.key !== 'Enter') return;
-    tasks.value.push({
-        title: task.value.title,
-        subtitle: task.value.subtitle,
-    });
-    task.value.title = '';
-    task.value.subtitle = '';
-}
-
+const props = defineProps({
+    tasks: Object
+})
 </script>
