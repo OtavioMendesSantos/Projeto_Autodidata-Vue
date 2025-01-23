@@ -15,7 +15,7 @@
                             <v-btn color="primary" icon="mdi-dots-vertical" v-bind="props" variant="plain"></v-btn>
                         </template>
                         <v-list>
-                            <v-list-item value="1" @click="toggleDialogTaskFields">
+                            <v-list-item value="1" @click="toggleDialogTaskFields(index)">
                                 <v-list-item-title>Editar</v-list-item-title>
                             </v-list-item>
                             <v-list-item value="2" @click="toggleDialogTaskFields">
@@ -26,7 +26,8 @@
                 </template>
             </v-list-item>
         </v-list>
-        <DialogTaskFields :dialog="showDialogTaskFields" @toggle="toggleDialogTaskFields"/>
+        <DialogTaskFields :dialog="showDialogTaskFields" :task="tasks[indexTaskSelected]"
+            @toggle="toggleDialogTaskFields" />
     </div>
 </template>
 
@@ -39,9 +40,12 @@ const props = defineProps({
 })
 
 const showDialogTaskFields = ref(false);
+const indexTaskSelected = ref(0)
 
-function toggleDialogTaskFields() {
+function toggleDialogTaskFields(index) {
     showDialogTaskFields.value = !showDialogTaskFields.value;
+    if (index != null) indexTaskSelected.value = index;
 }
+
 
 </script>
