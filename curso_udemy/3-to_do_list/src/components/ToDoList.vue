@@ -1,26 +1,13 @@
 <template>
     <div>
-        <v-text-field label="Add Task" @keyup="addTask" v-model="task.title"></v-text-field>
-        <list-tasks :tasks="tasks" />
+        <v-text-field label="Add Task" @keyup.enter="taskStore.addTask" v-model="taskStore.titleTaskCreating"></v-text-field>
+        <list-tasks :tasks="taskStore.tasks" />
     </div>
 </template>
 
 <script setup>
 import ListTasks from './ListTasks.vue';
+import { useTaskStore } from '@/stores/task';
 
-import { ref } from 'vue';
-
-const task = ref({ title: '', subtitle: '' });
-const tasks = ref([])
-
-function addTask(e) {
-    if (e.key !== 'Enter') return;
-    tasks.value.push({
-        title: task.value.title,
-        subtitle: task.value.subtitle,
-    });
-    task.value.title = '';
-    task.value.subtitle = '';
-}
-
+const taskStore = useTaskStore();
 </script>
