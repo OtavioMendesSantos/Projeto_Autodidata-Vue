@@ -17,12 +17,30 @@ export const useTaskStore = defineStore('task', {
             },
         ],
         titleTaskCreating: '',
+        showDialogDelete: false,
+        showDialogEdit: false,
+
+        indexTaskSelected: 0,
     }),
     actions: {
         addTask() {
             this.tasks.push({
                 title: this.titleTaskCreating
-            })
+            });
+            this.titleTaskCreating = '';
+        },
+        toggleDelete(index) {
+            this.showDialogDelete = !this.showDialogDelete;
+            if (index != null) this.indexTaskSelected = index;
+        },
+        deleteTask() {
+            this.tasks.splice(this.indexTaskSelected, 1);
+            this.toggleDelete();
+        },
+        toggleEdit(index) {
+            this.showDialogEdit = !this.showDialogEdit;
+            if (index != null) this.indexTaskSelected = index;
         }
+        
     }
 })

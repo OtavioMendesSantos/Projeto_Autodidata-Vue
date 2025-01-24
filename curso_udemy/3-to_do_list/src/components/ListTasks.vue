@@ -2,8 +2,8 @@
     <div>
         <v-list lines="three" select-strategy="classic">
             <v-list-subheader>Tasks</v-list-subheader>
-            <v-list-item v-for="(task, index) in props.tasks" :key="index" :subtitle="task.subtitle" :title="task.title"
-                :value="index">
+            <v-list-item v-for="(task, index) in taskStore.tasks" :key="index" :subtitle="task.subtitle"
+                :title="task.title" :value="index">
                 <template v-slot:prepend="{ isSelected }">
                     <v-list-item-action start>
                         <v-checkbox-btn :model-value="isSelected"></v-checkbox-btn>
@@ -15,11 +15,11 @@
                             <v-btn color="primary" icon="mdi-dots-vertical" v-bind="props" variant="plain"></v-btn>
                         </template>
                         <v-list>
-                            <v-list-item value="1" @click="toggleDialogTaskFields(index)">
-                                <v-list-item-title>Editar</v-list-item-title>
+                            <v-list-item value="1" @click="taskStore.toggleEdit(index)">
+                                <v-list-item-title>Edit</v-list-item-title>
                             </v-list-item>
-                            <v-list-item value="2" @click="toggleDialogDelete(index)">
-                                <v-list-item-title>Deletar</v-list-item-title>
+                            <v-list-item value="2" @click="taskStore.toggleDelete(index)">
+                                <v-list-item-title>Delete</v-list-item-title>
                             </v-list-item>
                         </v-list>
                     </v-menu>
@@ -27,39 +27,16 @@
             </v-list-item>
         </v-list>
 
-        <DialogTaskFields :dialog="showDialogTaskFields" :task="tasks[indexTaskSelected]"
-            @toggle="toggleDialogTaskFields" />
+        <DialogTaskFields :task="taskStore.tasks[taskStore.indexTaskSelected]" />
 
-        <DialogDelete :dialog="showDialogDelete" @toggleDelete="toggleDialogDelete"
-            @deleteTask="deleteTask" />
+        <DialogDelete />
     </div>
 </template>
 
 <script setup>
-import { defineProps, ref } from 'vue';
 import DialogTaskFields from './DialogTaskFields.vue';
 import DialogDelete from './DialogDelete.vue';
+import { useTaskStore } from '@/stores/task';
 
-const props = defineProps({
-    tasks: Object
-})
-
-const showDialogTaskFields = ref(false);
-const showDialogDelete = ref(false);
-const indexTaskSelected = ref(0)
-
-function toggleDialogTaskFields(index) {
-    showDialogTaskFields.value = !showDialogTaskFields.value;
-    if (index != null) indexTaskSelected.value = index;
-}
-
-function toggleDialogDelete(index) {
-    showDialogDelete.value = !showDialogDelete.value;
-}
-
-function deleteTask(index) {
-    props.tasks.splice(index, 1);
-    toggleDialogDelete();
-}
-
+const taskStore = useTaskStore();
 </script>

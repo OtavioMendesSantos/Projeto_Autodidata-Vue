@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-text-field label="Add Task" @keyup.enter="taskStore.addTask" v-model="taskStore.titleTaskCreating"></v-text-field>
-        <list-tasks :tasks="taskStore.tasks" />
+        <list-tasks />
     </div>
 </template>
 

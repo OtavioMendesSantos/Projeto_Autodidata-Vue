@@ -1,6 +1,6 @@
 <template>
     <div class="text-center pa-4">
-        <v-dialog v-model="props.dialog" max-width="400" persistent>
+        <v-dialog v-model="taskStore.showDialogEdit" max-width="400" persistent>
             <v-card>
                 <!-- Conteúdo principal -->
                 <v-card-text>
@@ -11,7 +11,7 @@
                 <!-- Ações -->
                 <template v-slot:actions>
                     <v-spacer></v-spacer>
-                    <v-btn @click="$emit('toggle')">
+                    <v-btn @click="taskStore.toggleEdit()">
                         Ok
                     </v-btn>
                 </template>
@@ -22,9 +22,10 @@
 
 <script setup>
 import { defineProps } from 'vue';
+import { useTaskStore } from '@/stores/task';
+const taskStore = useTaskStore();
 
 const props = defineProps({
-    dialog: Boolean,
     task: Object
 })
 
