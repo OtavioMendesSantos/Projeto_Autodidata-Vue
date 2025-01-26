@@ -47,6 +47,9 @@ export const useTaskStore = defineStore('task', {
         saveLocalData() {
             localStorage.setItem('tasks', JSON.stringify(this.tasks));
         },
-        
+        getTasks() {
+            const items = localStorage.getItem('tasks')
+            if (items) this.tasks = JSON.parse(localStorage.getItem('tasks'));
+        }
     }
 })
