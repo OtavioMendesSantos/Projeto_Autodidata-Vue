@@ -1,7 +1,7 @@
 <template>
     <div class="text-center pa-4">
         <v-dialog v-model="taskStore.showDialogEdit" max-width="400" persistent>
-            <v-card>
+            <v-card title="Edit Task" prepend-icon="mdi-pencil">
                 <!-- Conteúdo principal -->
                 <v-card-text>
                     <v-text-field label="Title" v-model="props.task.title"></v-text-field>
@@ -11,7 +11,7 @@
                 <!-- Ações -->
                 <template v-slot:actions>
                     <v-spacer></v-spacer>
-                    <v-btn @click="taskStore.toggleEdit()">
+                    <v-btn @click="taskStore.toggleEdit()" variant="elevated" color="primary">
                         Ok
                     </v-btn>
                 </template>
