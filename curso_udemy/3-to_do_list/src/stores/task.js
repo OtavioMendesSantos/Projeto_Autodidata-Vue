@@ -24,6 +24,8 @@ export const useTaskStore = defineStore('task', {
     }),
     actions: {
         addTask() {
+            console.log('Adding task:', this.titleTaskCreating);
+            if (!this.titleTaskCreating || this.titleTaskCreating.length < 3 || this.titleTaskCreating.length > 50) return;
             this.tasks.push({
                 title: this.titleTaskCreating
             });
