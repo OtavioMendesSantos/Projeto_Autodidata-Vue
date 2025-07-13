@@ -1,5 +1,6 @@
 <template>
   <v-app id="inspire">
+    <Alert v-if="alertStore.showAlert"/>
     <v-navigation-drawer v-model="drawer">
       <v-img src="https://picsum.photos/1920/1080?random" gradient="to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)"
         height="70px" cover class="pt-2">
@@ -36,6 +37,10 @@
 
 <script setup>
 import { ref } from 'vue'
+import Alert from '@/components/Alert.vue'
+import { useAlertStore } from '@/stores/alert';
+
+const alertStore = useAlertStore();
 
 const drawer = ref(null)
 const items = [

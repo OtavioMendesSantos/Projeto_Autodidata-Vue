@@ -1,4 +1,7 @@
 import { defineStore } from 'pinia'
+import { useAlertStore } from '@/stores/alert';
+
+const alertStore = useAlertStore();
 
 export const useTaskStore = defineStore('task', {
     state: () => ({
@@ -29,6 +32,7 @@ export const useTaskStore = defineStore('task', {
             this.tasks.push({
                 title: this.titleTaskCreating
             });
+            alertStore.showAlertMessage();
             this.titleTaskCreating = '';
             this.saveLocalData();
         },

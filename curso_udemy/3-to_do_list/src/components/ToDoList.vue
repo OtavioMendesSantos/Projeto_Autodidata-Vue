@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-text-field label="Add Task" clearable :rules="rules" @keyup.enter="taskStore.addTask"
+        <v-text-field label="Add Task" clearable :rules="rules" @keyup.enter="addTask"
             v-model="taskStore.titleTaskCreating"></v-text-field>
         <list-tasks />
     </div>
@@ -21,4 +21,9 @@ const rules = [
 onMounted(() => {
     taskStore.getTasks();
 })
+
+function addTask() {
+    taskStore.addTask();
+}
+
 </script>
