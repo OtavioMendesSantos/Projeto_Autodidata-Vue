@@ -30,7 +30,8 @@ export const useTaskStore = defineStore('task', {
             console.log('Adding task:', this.titleTaskCreating);
             if (!this.titleTaskCreating || this.titleTaskCreating.length < 3 || this.titleTaskCreating.length > 50) return;
             this.tasks.push({
-                title: this.titleTaskCreating
+                title: this.titleTaskCreating,
+                done: false,
             });
             alertStore.showAlertMessage();
             this.titleTaskCreating = '';
@@ -56,6 +57,11 @@ export const useTaskStore = defineStore('task', {
         getTasks() {
             const items = localStorage.getItem('tasks')
             if (items) this.tasks = JSON.parse(localStorage.getItem('tasks'));
-        }
+        },
+        toggleDoneTask(index) {
+            this.tasks[index].done = !this.tasks[index].done;
+            this.saveLocalData();
+        },
+
     }
 })

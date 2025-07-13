@@ -3,10 +3,10 @@
         <v-list lines="three" select-strategy="classic">
             <v-list-subheader>Tasks</v-list-subheader>
             <v-list-item v-for="(task, index) in taskStore.tasks" :key="index" :subtitle="task.subtitle"
-                :title="task.title" :value="index">
-                <template v-slot:prepend="{ isSelected }">
+                :title="task.title"  @click="taskStore.toggleDoneTask(index)">
+                <template v-slot:prepend>
                     <v-list-item-action start>
-                        <v-checkbox-btn :model-value="isSelected"></v-checkbox-btn>
+                        <v-checkbox-btn :model-value="task.done"></v-checkbox-btn>
                     </v-list-item-action>
                 </template>
                 <template v-slot:append>
