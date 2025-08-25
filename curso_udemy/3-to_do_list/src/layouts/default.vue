@@ -37,7 +37,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import Alert from '@/components/Alert.vue'
+import Alert from '@/components/shared/Alert.vue'
 import { useAlertStore } from '@/stores/alert';
 
 const alertStore = useAlertStore();

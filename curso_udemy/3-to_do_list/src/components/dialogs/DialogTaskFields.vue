@@ -11,7 +11,7 @@
                 <!-- Ações -->
                 <template v-slot:actions>
                     <v-spacer></v-spacer>
-                    <v-btn @click="taskStore.toggleEdit()" variant="elevated" color="primary">
+                    <v-btn @click="taskStore.updateTask()" variant="elevated" color="primary">
                         Ok
                     </v-btn>
                 </template>

@@ -33,7 +33,7 @@ export const useTaskStore = defineStore('task', {
                 title: this.titleTaskCreating,
                 done: false,
             });
-            alertStore.showAlertMessage();
+            alertStore.showAlertMessage('success', 'Task created successfully!');
             this.titleTaskCreating = '';
             this.saveLocalData();
         },
@@ -42,14 +42,19 @@ export const useTaskStore = defineStore('task', {
             if (index != null) this.indexTaskSelected = index;
         },
         deleteTask() {
+            alertStore.showAlertMessage('warning', 'Task deleted successfully!');
             this.tasks.splice(this.indexTaskSelected, 1);
             this.toggleDelete();
             this.saveLocalData();
         },
         toggleEdit(index) {
             this.showDialogEdit = !this.showDialogEdit;
-            this.saveLocalData();
             if (index != null) this.indexTaskSelected = index;
+        },
+        updateTask() {
+            this.saveLocalData();
+            this.toggleEdit();
+            alertStore.showAlertMessage('success', 'Task edited successfully!');
         },
         saveLocalData() {
             localStorage.setItem('tasks', JSON.stringify(this.tasks));

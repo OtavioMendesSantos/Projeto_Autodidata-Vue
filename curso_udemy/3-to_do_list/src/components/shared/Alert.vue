@@ -1,7 +1,7 @@
 <template>
     <div class="alert-notification">
         <v-alert class="animate__animated animate__fadeIn animate__faster" closable @click:close="handleClose"
-            text="Task created successfully!" title="Success" type="success" />
+            :text="alertStore.message" title="Success" :type="alertStore.type" />
     </div>
 </template>
 
